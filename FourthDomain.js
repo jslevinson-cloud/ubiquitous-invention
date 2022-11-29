@@ -1,7 +1,9 @@
-function sayHello() {
-    alert("hello world jon in separate file!")
+function lookupWord() {
+    alert('here')
+    var textBox = document.getElementById('TEXTBOX_ID');
+    text = textBox.innerText;
+    alert(text)
     kjv = "kjv.csv"
-    alert("using cvs toObjects")
     var data = $.csv.toObjects(kjv)
     alert(data)
 }
