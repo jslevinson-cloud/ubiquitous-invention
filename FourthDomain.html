@@ -4,6 +4,7 @@
     <script type = "text/javascript" src="FourthDomain.js">
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="lib/css/FourthDomain.css">
     <link rel="stylesheet" href="lib/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="lib/css/dataTables.bootstrap.css"><link> 
     <script src="lib/js/jquery.csv.js"></script>
@@ -15,9 +16,10 @@
       <input type="file" name="inputkjv"
             id="inputkjv">
 
-      
-      <pre id="outputkjv"></pre>
-      <ul id="bibleverses"></ul>       
+      <p>
+      <textarea id="outputkjv" rows="19" cols="1" >
+      </textarea>
+      </p>
       <input id="TEXTBOX_ID" name="TEXTBOX_ID"></input>
       <button type="button" onclick = "lookupWord()">Enter Word</button> 
    </body>  

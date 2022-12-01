@@ -1,0 +1,4 @@
+textarea {
+    overflow-y: scroll; /* Vertical scrollbar */
+    overflow: scroll; /* Horizontal and vertical scrollbar*/
+ }

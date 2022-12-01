@@ -15,7 +15,7 @@ function lookupWord() {
 }
 function readTextFile(file)
 {
-    var rawFile = new XMLHttpRequest();
+     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function ()
     {
@@ -24,7 +24,19 @@ function readTextFile(file)
             if(rawFile.status === 200 || rawFile.status == 0)
             {
                 var allText = rawFile.responseText;
-                alert(allText);
+                console.log(allText);
+                //alert(allText);
+                var data = $.csv.toObjects(allText);
+                var textarea = document.getElementById("outputkjv")
+                //alert(data[0][0]);
+               //console.log(data);
+                for (i=0; i < data.length; i++) {
+                    textarea.value +=  data[i];
+                    if (data[i].length >= 2) {
+                        textarea.value += data[i][5];
+                    }
+                }
+  
             }
         }
     }
