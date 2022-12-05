@@ -1,8 +1,10 @@
 var lookup;
 function lookupWord() {
     lookup = document.getElementById('TEXTBOX_ID').value;
-    kjv = "http:localhost:8000/kjv.csv"
-    readTextFile(kjv)
+    textarea = document.getElementById('outputkjv');
+    //textarea.value = "";
+    kjv = "http:localhost:8000/kjv.csv";
+    readTextFile(kjv);
     /*
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
@@ -34,7 +36,7 @@ function readTextFile(file)
                     text = datasplit[p].split(",")[5];
                     //console.log("reference="+reference)
                     //console.log(String(text));
-                    if (String(text).search(lookup) != -1) {
+                    if (typeof(text) != 'undefined' && String(text.toUpperCase()).search(lookup.toUpperCase()) != -1) {
                         var newText = document.createTextNode(text+'\n');
                         var textarea = document.getElementById('outputkjv');
                         textarea.appendChild(newText);
