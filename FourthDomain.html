@@ -10,6 +10,7 @@
     <script src="lib/js/jquery.csv.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script
     <script src="http://ajax.googleapis.com/js/dataTables.bootstrap.js"></script>
+    
    </head>
    
    <body>
@@ -21,6 +22,24 @@
       </textarea>
       </p>
       <input id="TEXTBOX_ID" name="TEXTBOX_ID"></input>
-      <button type="button" onclick = "lookupWord()">Enter Word</button> 
+      <script>
+         // Get the input field
+         var input = document.getElementById("TEXTBOX_ID");
+   
+         // Execute a function when the user presses a key on the keyboard
+         input.addEventListener("keypress", function(event) {
+         // If the user presses the "Enter" key on the keyboard
+         if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementById("buttonId").click();
+         }
+         });
+   
+       </script>
+
+      <button type="button" id="buttonId" onclick = "lookupWord()" >Enter Word</button> 
    </body>  
 </html>
+<!-- onkeydown="if (event.key=='ENTER')lookupWord()"-->
