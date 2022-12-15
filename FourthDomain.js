@@ -7,39 +7,76 @@ function lookupWord() {
     }
     textarea = document.getElementById('outputkjv');
     //textarea.value = "";
+    thesaurus = "http:localhost:8000/Thesaurus/WordnetThesaurus.csv"
     kjv = "http:localhost:8000/kjv.csv";
-    readTextFile(kjv);
-}
-function readTextFile(file)
+    thesaurus_text = readThesaurus(thesaurus)
+    allText = readTextFile(kjv);
+    processTextFile(textarea, allText, thesaurus_text);
+ }
+
+function processTextFile(textarea, allText, thesaurus)
 {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    console.log("lookup1="+lookup);
-    rawFile.onreadystatechange = function ()
-    {
-        console.log("lookup2 = "+lookup);
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                //console.log(allText);
+    thesaurus += lookup +'\n';
+    var thesaurus_split = thesaurus.split("\n");
+    for (prop in thesaurus_split) {
+        thesaurus_line = thesaurus_split[prop];
+        if (typeof(thesaurus_line) != 'undefined' && thesaurus_line.toUpperCase().search(lookup.toUpperCase()) != -1) {
+            console.log(thesaurus_line);
+            words = thesaurus_line.split(",");
+            for (word in words) {
+                //console.log("word="+words[word]);
                 datasplit = allText.split("\n");
                 for (p in datasplit) {
                     //reference = datasplit[p].split(",")[0];
                     text = datasplit[p].split(",")[5];
-                    if (typeof(text) != 'undefined' && String(text.toUpperCase()).search(lookup.toUpperCase()) != -1) {
+                    if (typeof(text) != 'undefined' && String(text.toUpperCase()).search(words[word].toUpperCase()) != -1) {
                         var newText = document.createTextNode(text+'\n');
-                        var textarea = document.getElementById('outputkjv');
-                        textarea.appendChild(newText);
+                        //textarea.appendChild(newText);
                         console.log("text="+text);
                     }
                 }
-                var textarea = document.getElementById("outputkjv")
-  
+            }
+        }
+
+    }
+
+}
+
+function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    var allText;
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                    allText = rawFile.responseText;
             }
         }
     }
     rawFile.send(null);
+    return allText;
+}
+
+function readThesaurus(thesaurus)
+{
+    var rawFile = new XMLHttpRequest();
+    var allText;
+    rawFile.open("GET", thesaurus, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                allText = rawFile.responseText;
+            }
+        }
+    }
+    rawFile.send(null);
+    return allText;
 }
 
